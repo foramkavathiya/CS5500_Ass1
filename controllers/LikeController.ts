@@ -5,6 +5,7 @@
 import LikeDao from "../daos/LikeDao";
 import LikeControllerI from "../interfaces/LikeController";
 import TuitDao from "../daos/TuitDao";
+import DislikeDao from "../daos/DislikeDao";
 
  
  /**
@@ -29,6 +30,7 @@ import TuitDao from "../daos/TuitDao";
  export default class LikeController implements LikeControllerI {
      private static likeDao: LikeDao = LikeDao.getInstance();
      private static tuitDao: TuitDao = TuitDao.getInstance();
+     private static dislikeDao: DislikeDao = DislikeDao.getInstance();
      private static likeController: LikeController | null = null;
      /**
       * Creates singleton controller instance
@@ -127,6 +129,8 @@ import TuitDao from "../daos/TuitDao";
         try {
             const userAlreadyLikedTuit = await likeDao.findUserLikesTuit(userId, tid);
             const howManyLikedTuit = await likeDao.countHowManyLikedTuit(tid);
+            const userAlreadyDislikedTuit = await LikeController.dislikeDao.findUserDislikedTuit(userId,tid);
+            const howManyDislikedTuit = await LikeController.dislikeDao.countHowManyDislikedTuit(tid);
             let tuit = await tuitDao.findTuitById(tid);
             if (userAlreadyLikedTuit) {
                 await likeDao.userUnlikesTuit(userId, tid);
@@ -134,7 +138,11 @@ import TuitDao from "../daos/TuitDao";
             } else {
                 await LikeController.likeDao.userLikesTuit(userId, tid);
                 tuit.stats.likes = howManyLikedTuit + 1;
-            };
+            }
+            if(userAlreadyDislikedTuit){
+                await LikeController.dislikeDao.userRemoveDislikesTuit(userId,tid);
+                tuit.stats.dislikes = howManyDislikedTuit - 1;
+            }
             await tuitDao.updateLikes(tid, tuit.stats);
             res.sendStatus(200);
         } catch (e) {
