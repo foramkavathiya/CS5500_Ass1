@@ -23,6 +23,28 @@
      }
      private constructor() {}
  
+     /**
+      * Retrieves all users that disliked a tuit from the database
+      * @param tid Represents id of the tuit
+      */
+
+    findAllUsersThatDislikedTuit = async (tid: string): Promise<Dislike[]> =>
+    DislikeModel
+        .find({tuit: tid})
+        .populate("dislikedBy")
+        .exec();
+
+/**
+  * Retrieves all tuits disliked by a user from the database
+  * @param uid Represents id of the user
+  */
+
+findAllTuitsDislikedByUser = async (uid: string): Promise<Dislike[]> =>
+    DislikeModel
+        .find({dislikedBy: uid})
+        .populate("tuit")
+        .exec();
+
      
  
      /**

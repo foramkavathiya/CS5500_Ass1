@@ -6,6 +6,7 @@ import DislikeDao from "../daos/DislikeDao";
 import DislikeControllerI from "../interfaces/DislikeController";
 import TuitDao from "../daos/TuitDao";
 import LikeDao from "../daos/LikeDao";
+import Dislike from "../models/Dislike";
 
  
  /**
@@ -61,9 +62,13 @@ import LikeDao from "../daos/LikeDao";
         const userId = uid === "me" && profile ?
             profile._id : uid;
 
-        DislikeController.dislikeDao.findUserDislikedTuit(userId,tid)
-            .then(dislike => res.json(dislike));
-            
+        DislikeController.dislikeDao.findAllTuitsDislikedByUser(userId)
+        .then(dislikes => {
+            const dislikesNonNullTuits = dislikes.filter(dislike => dislike.tuit);
+            const tuitsFromDislikes = dislikesNonNullTuits.map(dislike => dislike.tuit);
+            res.json(tuitsFromDislikes);
+
+        });
     }
     
 

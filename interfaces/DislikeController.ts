@@ -5,5 +5,6 @@ import {Request, Response} from "express";
  */
 
 export default interface DislikeController {
+    findAllTuitsDislikedByUser(req: Request, res: Response): void;
     userTogglesTuitDislikes (req: Request, res: Response): void;
 };
