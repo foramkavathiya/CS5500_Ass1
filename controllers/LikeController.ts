@@ -127,13 +127,13 @@ import DislikeDao from "../daos/DislikeDao";
         const userId = uid === "me" && profile ?
             profile._id : uid;
         try {
-            const userAlreadyLikedTuit = await likeDao.findUserLikesTuit(userId, tid);
-            const howManyLikedTuit = await likeDao.countHowManyLikedTuit(tid);
+            const userAlreadyLikedTuit = await LikeController.likeDao.findUserLikesTuit(userId, tid);
+            const howManyLikedTuit = await LikeController.likeDao.countHowManyLikedTuit(tid);
             const userAlreadyDislikedTuit = await LikeController.dislikeDao.findUserDislikedTuit(userId,tid);
             const howManyDislikedTuit = await LikeController.dislikeDao.countHowManyDislikedTuit(tid);
             let tuit = await tuitDao.findTuitById(tid);
             if (userAlreadyLikedTuit) {
-                await likeDao.userUnlikesTuit(userId, tid);
+                await LikeController.likeDao.userUnlikesTuit(userId, tid);
                 tuit.stats.likes = howManyLikedTuit - 1;
             } else {
                 await LikeController.likeDao.userLikesTuit(userId, tid);
@@ -143,7 +143,7 @@ import DislikeDao from "../daos/DislikeDao";
                 await LikeController.dislikeDao.userRemoveDislikesTuit(userId,tid);
                 tuit.stats.dislikes = howManyDislikedTuit - 1;
             }
-            await tuitDao.updateLikes(tid, tuit.stats);
+            await LikeController.tuitDao.updateLikes(tid, tuit.stats);
             res.sendStatus(200);
         } catch (e) {
             res.sendStatus(404);
