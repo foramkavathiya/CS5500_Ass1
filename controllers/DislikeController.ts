@@ -48,12 +48,13 @@ import Dislike from "../models/Dislike";
  
      
      /**
-      * Finnd if user already disliked a tuit
+      * Find if user already disliked a tuit
       * @param {Request} req Represents request from client, including the path
       * parameter uid representing the user liked the tuits
       * @param {Response} res Represents response to client, including the
       * body formatted as JSON arrays containing the tuit objects that were liked
       */
+
       findAllTuitsDislikedByUser = (req: Request, res: Response) => {
         const uid = req.params.uid;
         const tid = req.params.tid;
