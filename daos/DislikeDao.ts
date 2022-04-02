@@ -49,7 +49,7 @@
                   }
               })
               .exec();
- 
+
      /**
        * Create a dislike instance
        * @param uid Represents id of the user
