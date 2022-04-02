@@ -6,7 +6,6 @@ import DislikeDao from "../daos/DislikeDao";
 import DislikeControllerI from "../interfaces/DislikeController";
 import TuitDao from "../daos/TuitDao";
 import LikeDao from "../daos/LikeDao";
-import Dislike from "../models/Dislike";
 
  
  /**
@@ -81,6 +80,7 @@ import Dislike from "../models/Dislike";
      * body formatted as JSON containing the new likes that was inserted in the
      * database
      */
+
      userTogglesTuitDislikes = async (req: Request, res: Response) => {
         const dislikeDao = DislikeController.dislikeDao;
         const tuitDao = DislikeController.tuitDao;
