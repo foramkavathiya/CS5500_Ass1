@@ -39,11 +39,16 @@ export default class LikeDao implements LikeDaoI {
       * @param uid Represents id of the user
       */
 
-    findAllTuitsLikedByUser = async (uid: string): Promise<Like[]> =>
-        LikeModel
-            .find({likedBy: uid})
-            .populate("tuit")
-            .exec();
+     findAllTuitsLikedByUser = async (uid: string): Promise<Like[]> =>
+     LikeModel
+         .find({likedBy: uid})
+         .populate({
+             path: "tuit",         
+             populate: {
+                 path: "postedBy" 
+             }
+         })
+         .exec();
 
     /**
       * Create a like instance
