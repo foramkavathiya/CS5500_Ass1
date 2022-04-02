@@ -24,6 +24,7 @@ import LikeDao from "../daos/LikeDao";
   */
 
 
+
  export default class DislikeController implements DislikeControllerI {
      private static dislikeDao: DislikeDao = DislikeDao.getInstance();
      private static tuitDao: TuitDao = TuitDao.getInstance();
