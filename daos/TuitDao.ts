@@ -84,6 +84,11 @@
     deleteTuitByUserId = async (uid: string): Promise<any> =>
           TuitModel.deleteOne({postedBy: uid});
 
+    /**
+     * Update likes
+     * @param {string} tid Primary key of the tuit
+     * @param {stats} newStats Stats of the tuit
+     */
 
     updateLikes = async (tid: string, newStats: any): Promise<any> =>
           TuitModel.updateOne(
