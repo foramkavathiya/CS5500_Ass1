@@ -5,6 +5,7 @@
  *     <li>users</li>
  *     <li>tuits</li>
  *     <li>likes</li>
+ *     <li>dislikes</li>
  *     <li>bookmarks</li>
  *     <li>follows</li>
  *     <li>messages</li>
@@ -19,6 +20,7 @@
  import UserController from "./controllers/UserController";
  import TuitController from "./controllers/TuitController";
  import LikeController from "./controllers/LikeController";
+ import DislikeController from './controllers/DislikeController';
  import BookmarkController from "./controllers/BookmarkController";
  import FollowController from './controllers/FollowController';
  import MessageController from './controllers/MessageController';
@@ -68,6 +70,7 @@ app.use(session(sess))
  const userController = UserController.getInstance(app);
  const tuitController = TuitController.getInstance(app);
  const likesController = LikeController.getInstance(app);
+ const dislikesController = DislikeController.getInstance(app);
  const bookmarksController = BookmarkController.getInstance(app);
  const followController = FollowController.getInstance(app);
  const messageController = MessageController.getInstance(app);
