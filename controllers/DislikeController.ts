@@ -7,6 +7,7 @@ import DislikeControllerI from "../interfaces/DislikeController";
 import TuitDao from "../daos/TuitDao";
 
  
+
  /**
   * @class DislikeController Implements RESTful Web service API for dislikes resource.
   * Defines the following HTTP endpoints:
@@ -41,6 +42,7 @@ import TuitDao from "../daos/TuitDao";
          return DislikeController.dislikeController;
      }
  
+     
      private constructor() {}
  
      
@@ -51,7 +53,7 @@ import TuitDao from "../daos/TuitDao";
       * @param {Response} res Represents response to client, including the
       * body formatted as JSON arrays containing the tuit objects that were liked
       */
-     
+
       findAllTuitsDislikedByUser = (req: Request, res: Response) => {
         const uid = req.params.uid;
         const tid = req.params.tid;
