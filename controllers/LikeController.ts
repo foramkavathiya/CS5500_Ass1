@@ -19,6 +19,7 @@ import TuitDao from "../daos/TuitDao";
   *     </li>
   *     <li>DELETE /api/users/:uid/unlikes/:tid to record that a user
   *     no londer likes a tuit</li>
+  *     <li>PUT /api/users/:uid/likes/:tid to toggle like
   * </ul>
   * @property {LikeDao} likeDao Singleton DAO implementing likes CRUD operations
   * @property {LikeController} LikeController Singleton controller implementing
